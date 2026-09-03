@@ -1,4 +1,3 @@
-/* ===== ОСНОВНЫЕ СТИЛИ ДЛЯ ТЕЛА И ЗАГОЛОВКА ===== */
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
     max-width: 600px;
@@ -16,7 +15,6 @@ h1 {
     font-weight: 700;
 }
 
-/* ===== УПРАВЛЕНИЕ (поиск и фильтр) ===== */
 #form {
     display: flex;
     gap: 10px;
@@ -58,11 +56,9 @@ h1 {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
     min-width: 140px;
     height: 44px;
-    /* Убираем стандартную стрелку */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    /* Кастомная стрелка через background-image */
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 8'%3E%3Cpath fill='%23666' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 14px center;
@@ -70,7 +66,6 @@ h1 {
     box-sizing: border-box;
 }
 
-/* Для Firefox (убирает пунктирную рамку) */
 #form select::-moz-focus-inner {
     border: 0;
 }
@@ -80,12 +75,10 @@ h1 {
     text-shadow: 0 0 0 #333;
 }
 
-/* Ховер */
 #form select:hover {
     border-color: #b0b0b0;
 }
 
-/* ===== ОПЦИИ (стилизуются только в некоторых браузерах) ===== */
 #form select option {
     padding: 8px 12px;
     font-size: 14px;
@@ -99,20 +92,15 @@ h1 {
     color: white;
 }
 
-/* Для Firefox - стилизация опций */
 #form select option:hover,
 #form select option:focus {
     background-color: #f0f7ff;
 }
 
-
 #form select:hover {
     border-color: #b0b0b0;
 }
 
-
-
-/* ===== СТИЛИ ДЛЯ ОПЦИЙ ВЫПАДАЮЩЕГО СПИСКА ===== */
 #form select option {
     padding: 10px 16px;
     font-size: 14px;
@@ -131,7 +119,6 @@ h1 {
     color: white;
 }
 
-/* ===== СПИСОК ЗАДАЧ ===== */
 #ul {
     list-style: none;
     padding: 0;
@@ -171,13 +158,11 @@ h1 {
     word-break: break-word;
 }
 
-/* ===== ВЫПОЛНЕННАЯ ЗАДАЧА ===== */
 .completed {
     text-decoration: line-through;
     color: #999;
 }
 
-/* ===== ПУСТОЙ СПИСОК ===== */
 .empty-message {
     text-align: center;
     color: #aaa;
@@ -195,7 +180,6 @@ h1 {
     box-shadow: none !important;
 }
 
-/* ===== КНОПКИ В СПИСКЕ ===== */
 #ul li button {
     padding: 6px 16px;
     border: none;
@@ -208,7 +192,6 @@ h1 {
     white-space: nowrap;
 }
 
-/* Кнопка "Редактировать" - СИНЯЯ */
 #ul li .edit-btn {
     background: #007bff;
     color: white;
@@ -219,7 +202,6 @@ h1 {
     transform: scale(1.04);
 }
 
-/* Кнопка "Сохранить" - ЗЕЛЕНАЯ */
 #ul li .edit-btn.editing {
     background: #28a745;
     color: white;
@@ -229,7 +211,6 @@ h1 {
     background: #1e7e34;
 }
 
-/* Кнопка "Удалить" - КРАСНАЯ */
 #ul li .delete-btn {
     background: #ff4757;
     color: white;
@@ -244,7 +225,6 @@ h1 {
     transform: scale(0.95);
 }
 
-/* ===== ПОЛЕ ВВОДА ПРИ РЕДАКТИРОВАНИИ ===== */
 .edit-input {
     flex: 1;
     padding: 6px 10px;
@@ -258,7 +238,6 @@ h1 {
     min-width: 0;
 }
 
-/* ===== МОДАЛЬНОЕ ОКНО ===== */
 .modal-overlay {
     display: none;
     position: fixed;
@@ -381,7 +360,6 @@ h1 {
     box-shadow: none !important;
 }
 
-/* ===== КНОПКА + ===== */
 .add-btn {
     position: fixed;
     bottom: 30px;
@@ -413,7 +391,6 @@ h1 {
     transform: scale(0.95);
 }
 
-/* ===== АНИМАЦИИ ===== */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -431,75 +408,6 @@ h1 {
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
-    }
-}
-
-/* ===== АДАПТИВНОСТЬ (мобильные устройства) ===== */
-@media (max-width: 500px) {
-    body {
-        padding: 12px;
-    }
-
-    h1 {
-        font-size: 26px;
-        margin-bottom: 20px;
-    }
-
-    #form {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    #form input[type="search"] {
-        min-width: auto;
-        width: 100%;
-    }
-
-    #form select {
-        width: 100%;
-        min-width: auto;
-    }
-
-    #ul li {
-        padding: 10px 12px;
-        flex-wrap: wrap;
-        gap: 6px;
-    }
-
-    #ul li span {
-        font-size: 14px;
-        flex-basis: 100%;
-        order: 0;
-    }
-
-    #ul li .edit-btn {
-        order: 1;
-    }
-
-    #ul li .delete-btn {
-        order: 2;
-    }
-
-    .modal {
-        padding: 24px 20px;
-        width: 95%;
-    }
-
-    .modal-header h2 {
-        font-size: 20px;
-    }
-
-    .modal-btn {
-        padding: 8px 20px;
-        font-size: 14px;
-    }
-
-    .add-btn {
-        width: 52px;
-        height: 52px;
-        font-size: 28px;
-        bottom: 20px;
-        right: 20px;
     }
 }
 
@@ -527,14 +435,4 @@ h1 {
 
 .delete-all-btn:active {
     transform: scale(0.95);
-}
-
-/* ===== АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ===== */
-@media (max-width: 500px) {
-    .delete-all-btn {
-        bottom: 85px;
-        right: 20px;
-        padding: 10px 16px;
-        font-size: 13px;
-    }
 }

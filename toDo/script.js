@@ -11,8 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     renderTasks(select.value, search.value);
 
-    // ========== ПОИСК С ЗАДЕРЖКОЙ ==========
-
     let timeout;
     search.addEventListener('input', function (e) {
         clearTimeout(timeout);
@@ -21,20 +19,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 300);
     });
 
-    // ========== ОТОБРАЖЕНИЕ С ПОИСКОМ ==========
-
     function renderTasks(filter = 'all', searchText = '') {
         ul.innerHTML = "";
         let filteredTasks = tasks;
 
-        // 1️⃣ Фильтр по статусу
         if (filter === 'completed') {
             filteredTasks = tasks.filter(li => li.dataset.completed === "true");
         } else if (filter === 'incompleted') {
             filteredTasks = tasks.filter(li => li.dataset.completed === "false");
         }
 
-        // 2️⃣ ✅ Фильтр по тексту (поиск)
         if (searchText.trim() !== '') {
             const lowerSearch = searchText.toLowerCase();
             //filteredTasks = [];
@@ -49,17 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ========== ФИЛЬТР ==========
-
     select.addEventListener('change', (e) => {
-        renderTasks(e.target.value, search.value); // ✅ Передаем оба параметра
+        renderTasks(e.target.value, search.value);
     });
 
     ul.addEventListener('click', (e) => {
         const li = e.target.closest("li");
         if (!li) return;
-
-        // ===== ИЗМЕНЕНИЕ СТАТУСА (клик по тексту) =====
         if (e.target.tagName === "SPAN") {
             e.target.classList.toggle("completed");
             if (li.dataset.completed === 'true') {
@@ -71,11 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // ===== КНОПКА УДАЛИТЬ =====
         if (e.target.classList.contains("delete-btn")) {
-            // Если кнопка в режиме "Отмена" — отменяем редактирование
             if (e.target.classList.contains("cancel-mode")) {
-                // Находим input и отменяем
                 const input = li.querySelector(".edit-input");
                 if (input) {
                     const currentText = li.dataset.originalText || '';
@@ -91,35 +78,24 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // ===== КНОПКА РЕДАКТИРОВАТЬ =====
         if (e.target.classList.contains("edit-btn")) {
-            // Если уже редактируем эту задачу — сохраняем
             if (e.target.classList.contains("editing")) {
                 saveEdit(li);
                 return;
             }
-
             startEdit(li);
         }
     });
 
-    // ===== ФУНКЦИЯ НАЧАЛА РЕДАКТИРОВАНИЯ =====
     function startEdit(li) {
         const span = li.querySelector("span");
         const currentText = span.textContent;
-
         li.dataset.originalText = currentText;
-
-        // Создаем input
         const input = document.createElement("input");
         input.type = "text";
         input.className = "edit-input";
         input.value = currentText;
-
-        // Заменяем span на input
         li.replaceChild(input, span);
-
-        // Меняем кнопки
         const editBtn = li.querySelector(".edit-btn");
         const deleteBtn = li.querySelector(".delete-btn");
 
@@ -129,11 +105,9 @@ document.addEventListener("DOMContentLoaded", function () {
         deleteBtn.textContent = "Отмена";
         deleteBtn.classList.add("cancel-mode");
 
-        // Фокус
         input.focus();
         input.select();
 
-        // Сохранение по Enter
         input.addEventListener("keydown", function handler(event) {
             if (event.key === "Enter") {
                 event.preventDefault();
@@ -145,7 +119,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
-        // Сохранение при потере фокуса
         input.addEventListener("blur", function handler(event) {
             if (event.relatedTarget &&
                 (event.relatedTarget.classList.contains("edit-btn") ||
@@ -156,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // ===== ФУНКЦИЯ СОХРАНЕНИЯ =====
     function saveEdit(li) {
         const input = li.querySelector(".edit-input");
         if (!input) return;
@@ -169,7 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Обновляем текст
         const newSpan = document.createElement("span");
         newSpan.textContent = newText;
         if (li.dataset.completed === 'true') {
@@ -177,7 +148,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         li.replaceChild(newSpan, input);
 
-        // Возвращаем кнопки
         const editBtn = li.querySelector(".edit-btn");
         const deleteBtn = li.querySelector(".delete-btn");
 
@@ -187,7 +157,6 @@ document.addEventListener("DOMContentLoaded", function () {
         deleteBtn.textContent = "Удалить";
         deleteBtn.classList.remove("cancel-mode");
 
-        // Обновляем массив
         const taskIndex = tasks.findIndex(task => task.dataset.id === li.dataset.id);
         if (taskIndex !== -1) {
             const task = tasks[taskIndex];
@@ -200,7 +169,6 @@ document.addEventListener("DOMContentLoaded", function () {
         renderTasks(select.value, search.value);
     }
 
-    // ===== ФУНКЦИЯ ОТМЕНЫ =====
     function cancelEdit(li, input, currentText) {
         // Возвращаем span
         const newSpan = document.createElement("span");
@@ -210,7 +178,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         li.replaceChild(newSpan, input);
 
-        // Возвращаем кнопки
         const editBtn = li.querySelector(".edit-btn");
         const deleteBtn = li.querySelector(".delete-btn");
 
@@ -221,30 +188,24 @@ document.addEventListener("DOMContentLoaded", function () {
         deleteBtn.classList.remove("cancel-mode");
     }
 
-    // ========== ОТКРЫТЬ МОДАЛКУ ==========
     function openModal() {
         modalOverlay.classList.add("active");
     }
 
-    // ========== ЗАКРЫТЬ МОДАЛКУ ==========
     function closeModal() {
         modalOverlay.classList.remove("active");
     }
 
-    // ========== КЛИК ПО КНОПКЕ "+" ==========
     addButton.addEventListener("click", openModal);
 
-    // ========== ЗАКРЫТИЕ ПО КНОПКЕ "×" ==========
     if (modalClose) {
         modalClose.addEventListener("click", closeModal);
     }
 
-    // ========== ЗАКРЫТИЕ ПО КНОПКЕ "ОТМЕНА" ==========
     if (modalCancel) {
         modalCancel.addEventListener("click", closeModal);
     }
 
-    // ========== ЗАКРЫТИЕ ПО КЛИКУ НА ФОН ==========
     modalOverlay.addEventListener("click", function (e) {
         if (e.target === modalOverlay) {
             closeModal();
@@ -261,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const li = document.createElement("li");
         li.dataset.id = Date.now();
-        li.dataset.completed = "false"; // ✅ Строка, а не булево!
+        li.dataset.completed = "false";
 
         const span = document.createElement("span");
         span.textContent = modalInput.value;
@@ -281,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tasks.push(li);
 
         modalInput.value = "";
-        renderTasks(select.value, search.value); // ✅ Передаем оба параметра
+        renderTasks(select.value, search.value);
         closeModal();
     });
 
