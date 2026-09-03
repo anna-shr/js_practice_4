@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./script.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <div class="custom-select-wrapper">
+        <div class="custom-select" id="customSelect">
+            <div class="custom-select-trigger" id="customSelectTrigger">
+                <span class="custom-select-value" id="customSelectValue">Все</span>
+                <span class="custom-select-arrow">▼</span>
+            </div>
+            <div class="custom-select-options" id="customSelectOptions">
+                <div class="custom-select-option" data-value="all">Все</div>
+                <div class="custom-select-option" data-value="completed">Выполненные</div>
+                <div class="custom-select-option" data-value="incompleted">Невыполненные</div>
+            </div>
+        </div>
+    </div>
+
+
+    <select id="select" style="display:none;">
+        <option value="all">Все</option>
+        <option value="completed">Выполненные</option>
+        <option value="incompleted">Невыполненные</option>
+    </select>
+
+</body>
+
+</html>

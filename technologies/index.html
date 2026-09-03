@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изученные технологии</title>
+    <script src="./script.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<div class="container">
+    <div class="left-col">
+        <h2 class="heading">Ваш прогресс</h2>
+        <div class="progress">
+            <div class="progress-bar">
+                <div class="progress-value" id="progress"></div>
+            </div>
+        </div>
+
+
+        <div class="row" id="content">
+
+        </div>
+    </div>
+
+    <form class="form" id="form">
+        <h2 class="heading">Добавить технологию</h2>
+        <div class="form-control">
+            <label for="title">Название</label>
+            <input type="text" id="title" placeholder="Введите название">
+        </div>
+
+        <div class="form-control">
+            <label for="description">Описание</label>
+            <textarea name="description" id="description" placeholder="Введите описание"></textarea>
+        </div>
+
+        <button type="submit" class="btn">Создать</button>
+    </form>
+</div>
+
+
+<div class="modal" id="modal"></div>
+
+<div class="modal-backdrop" id="backdrop"></div>
+
+</body>
+
+</html>

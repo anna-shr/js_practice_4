@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./script.js"></script>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    <h1>ToDo List</h1>
+
+    <form id="form">
+        <input type="search" id="search" placeholder="Search note..." />
+
+        <select id="select">
+            <option value="all">All</option>
+            <option value="completed">Completed</option>
+            <option value="incompleted">Incompleted</option>
+        </select>
+    </form>
+    <button class="delete-all-btn" id="delAllBtn" type="button">Удалить всё</button>
+
+    <button class="add-btn" id="addBtn" type="button">+</button>
+
+    <ul id="ul"></ul>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Добавить задачу</h2>
+                <button class="modal-close" id="modalClose">×</button>
+            </div>
+            <input type="text" id="modalInput" placeholder="Введите текст задачи..." />
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" id="modalCancel">Отмена</button>
+                <button class="modal-btn modal-btn-add" id="modalAdd">Добавить</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
